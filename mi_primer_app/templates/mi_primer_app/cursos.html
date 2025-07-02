@@ -1,0 +1,30 @@
+{%extends "padre.html"%}
+{%block title%} Cursos {%endblock%}
+
+{%block content%}
+
+    <h2>Crear curso</h2>
+    <form method="GET" action="{% url 'buscar-cursos' %}">
+        <input type="text" name="nombre" placeholder="Buscar curso" value="{{ nombre }}">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <h2>Resultados de la búsqueda</h2>
+    <ul>
+        {% for curso in cursos %}
+            <li>{{ curso.nombre }} - {{ curso.descripcion }}</li>
+        {% empty %}
+            <li>No se encontraron cursos.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'crear-curso' %}">Crear nuevo curso</a>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if success %}
+        <p style="color: green;">{{ success }}</p>
+    {% endif %}
+{%endblock%}
